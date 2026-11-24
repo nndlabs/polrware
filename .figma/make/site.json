@@ -1,0 +1,15 @@
+{
+  "description": "Polrware makes winter outerwear and layers field-tested above the Arctic Circle. Down jackets, alpine shells, fleece and merino, with free lifetime repairs.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  },
+  "title": "Polrware | Winter clothing built for deep cold",
+  "language": "en",
+  "icons": {
+    "icon": "favicon.png"
+  }
+}

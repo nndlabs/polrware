@@ -1,0 +1,249 @@
+[
+  {
+    "id": "birch-coach-jacket",
+    "name": "Birch Coach Jacket",
+    "material": "Cotton canvas, cord collar",
+    "price": 185,
+    "w": 360,
+    "h": 346,
+    "back": true,
+    "description": "A cropped coach jacket in stone-washed cotton canvas. A chocolate corduroy collar and a plaid flannel lining take the edge off cold mornings.",
+    "features": [
+      "Corduroy collar",
+      "Plaid flannel lining",
+      "Snap front",
+      "Drawcord hem"
+    ],
+    "fit": "Cropped and boxy. Take your usual size.",
+    "sizes": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      0
+    ]
+  },
+  {
+    "id": "fjord-coach-jacket",
+    "name": "Fjord Coach Jacket",
+    "material": "Cotton canvas, cord collar",
+    "price": 185,
+    "w": 359,
+    "h": 347,
+    "back": true,
+    "description": "The coach jacket in deep navy canvas. Brown corduroy at the collar, a warm flannel lining and a hem you can cinch against the wind.",
+    "features": [
+      "Navy cotton canvas",
+      "Corduroy collar",
+      "Flannel-lined body",
+      "Adjustable drawcord hem"
+    ],
+    "fit": "Cropped and boxy. Take your usual size.",
+    "sizes": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      1
+    ]
+  },
+  {
+    "id": "granite-wool-zip",
+    "name": "Granite Wool Zip",
+    "material": "Wool blend",
+    "price": 210,
+    "w": 367,
+    "h": 351,
+    "back": true,
+    "description": "A boxy zip jacket in a soft, textured wool blend. Clean point collar, slant hand pockets and buttoned cuffs. Easy over a knit.",
+    "features": [
+      "Textured wool blend",
+      "Metal zip front",
+      "Slant hand pockets",
+      "Button cuffs"
+    ],
+    "fit": "Regular fit with room for a sweater.",
+    "sizes": [
+      1,
+      1,
+      1,
+      0,
+      1,
+      0
+    ]
+  },
+  {
+    "id": "moss-field-jacket",
+    "name": "Moss Field Jacket",
+    "material": "Cotton twill, cord collar",
+    "price": 220,
+    "w": 354,
+    "h": 351,
+    "back": true,
+    "description": "An olive twill field jacket with four pockets: two flap pockets, a hidden chest pocket and a corduroy collar over a checked lining.",
+    "features": [
+      "Cotton twill",
+      "Four pockets",
+      "Corduroy collar",
+      "Checked lining"
+    ],
+    "fit": "Relaxed. Size down for a closer fit.",
+    "sizes": [
+      0,
+      1,
+      1,
+      1,
+      0,
+      1
+    ]
+  },
+  {
+    "id": "snowline-field-jacket",
+    "name": "Snowline Field Jacket",
+    "material": "Cotton canvas, cord collar",
+    "price": 220,
+    "w": 358,
+    "h": 352,
+    "description": "Our field jacket in cream canvas with a tan corduroy collar and gingham lining. Big flap pockets carry gloves, maps and a flask.",
+    "features": [
+      "Cream cotton canvas",
+      "Tan corduroy collar",
+      "Gingham lining",
+      "Flap cargo pockets"
+    ],
+    "fit": "Relaxed. Size down for a closer fit.",
+    "sizes": [
+      1,
+      0,
+      1,
+      1,
+      1,
+      0
+    ]
+  },
+  {
+    "id": "bark-cord-jacket",
+    "name": "Bark Cord Jacket",
+    "material": "Corduroy, fleece collar",
+    "price": 195,
+    "w": 354,
+    "h": 352,
+    "back": true,
+    "description": "A brown corduroy zip jacket with a soft cream fleece collar and roomy patch pockets. Wide wales that soften the more you wear it.",
+    "features": [
+      "Wide-wale corduroy",
+      "Fleece collar",
+      "Patch pockets",
+      "Button cuffs"
+    ],
+    "fit": "Regular fit. Take your usual size.",
+    "sizes": [
+      1,
+      1,
+      1,
+      1,
+      0,
+      1
+    ]
+  },
+  {
+    "id": "lake-zip-jacket",
+    "name": "Lake Zip Jacket",
+    "material": "Brushed twill",
+    "price": 175,
+    "w": 368,
+    "h": 354,
+    "back": true,
+    "description": "Slate-blue brushed twill in a clean, minimal zip jacket. Point collar, welt pockets and buttoned cuffs. The everyday layer.",
+    "features": [
+      "Brushed cotton twill",
+      "Point collar",
+      "Welt hand pockets",
+      "Button cuffs"
+    ],
+    "fit": "Regular fit. Take your usual size.",
+    "sizes": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  {
+    "id": "lichen-work-jacket",
+    "name": "Lichen Work Jacket",
+    "material": "Cotton twill",
+    "price": 180,
+    "w": 363,
+    "h": 362,
+    "description": "A grey-green work jacket in hard-wearing twill, with a zipped chest pocket and elasticated cuffs and hem that keep drafts out.",
+    "features": [
+      "Hard-wearing twill",
+      "Zipped chest pocket",
+      "Elastic cuffs and hem",
+      "Slant hand pockets"
+    ],
+    "fit": "Regular fit with a slightly cropped body.",
+    "sizes": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      0
+    ]
+  },
+  {
+    "id": "taupe-harrington",
+    "name": "Taupe Harrington",
+    "material": "Wool blend",
+    "price": 205,
+    "w": 358,
+    "h": 325,
+    "back": true,
+    "description": "A Harrington in a taupe wool blend with a gathered hem and buttoned cuffs. Smart enough for town, warm enough for the walk there.",
+    "features": [
+      "Wool-blend cloth",
+      "Gathered elastic hem",
+      "Metal zip front",
+      "Button cuffs"
+    ],
+    "fit": "Regular fit. Take your usual size.",
+    "sizes": [
+      1,
+      0,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  {
+    "id": "spruce-field-jacket",
+    "name": "Spruce Field Jacket",
+    "material": "Cotton twill, cord collar",
+    "price": 220,
+    "w": 360,
+    "h": 318,
+    "description": "Dark spruce twill, a forest corduroy collar and a checked lining. Two flap pockets and a snap front built for wet, windy days.",
+    "features": [
+      "Dark cotton twill",
+      "Corduroy collar",
+      "Checked lining",
+      "Snap front, flap pockets"
+    ],
+    "fit": "Relaxed. Size down for a closer fit.",
+    "sizes": [
+      1,
+      1,
+      1,
+      0,
+      1,
+      1
+    ]
+  }
+]
