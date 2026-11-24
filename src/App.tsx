@@ -15,6 +15,7 @@ import editorial1000 from './assets/editorial-1000.webp';
 import editorial2000 from './assets/editorial-2000.webp';
 import rackCatalog from './rack-catalog.json';
 import ProductModal, { type JacketDetail } from './ProductModal';
+import gearCatalog from './gear-catalog.json';
 import CheckoutModal, { type CheckoutLine } from './CheckoutModal';
 
 const BASE = import.meta.env.BASE_URL;
@@ -169,8 +170,21 @@ const rackProducts: Product[] = rackItems.map((item) => ({
   cutout: true,
 }));
 
-// shop grid: every jacket on the rail, then the layers and accessories
-const products: Product[] = [...rackProducts, ...otherProducts];
+// helmets: shop grid and product window only (they don't hang on the rail)
+const gearItems = gearCatalog as JacketDetail[];
+const gearProducts: Product[] = gearItems.map((item) => ({
+  name: item.name,
+  type: item.material,
+  price: item.price,
+  image: `${BASE}${item.views?.[0].file ?? ''}`,
+  category: item.category ?? 'Gear',
+  cutout: true,
+}));
+// everything that has a product window
+const detailItems: JacketDetail[] = [...rackItems, ...gearItems];
+
+// shop grid: every jacket on the rail, then helmets, then the layers and accessories
+const products: Product[] = [...rackProducts, ...gearProducts, ...otherProducts];
 // filters only for categories that actually have pieces; the row hides when there is just one
 const categories = ['All', ...Array.from(new Set(products.map((product) => product.category)))];
 
@@ -384,7 +398,7 @@ export default function App() {
   }, [activeCategory]);
 
   const openProduct = (name: string) => {
-    const i = rackItems.findIndex((item) => item.name === name);
+    const i = detailItems.findIndex((item) => item.name === name);
     if (i >= 0) setViewIndex(i);
   };
 
@@ -540,7 +554,7 @@ export default function App() {
                 items={rackItems}
                 onAdd={(item) => addToBag(item.name)}
                 onPick={(item) => openProduct(item.name)}
-                activeId={viewIndex !== null ? rackItems[viewIndex].id : null}
+                activeId={viewIndex !== null ? detailItems[viewIndex].id : null}
                 formatPrice={(value) => money.format(value)}
               />
               ) : (
@@ -920,7 +934,7 @@ export default function App() {
       />
 
       <ProductModal
-        items={rackItems}
+        items={detailItems}
         index={viewIndex}
         onClose={() => setViewIndex(null)}
         onNavigate={setViewIndex}

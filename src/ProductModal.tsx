@@ -1,14 +1,25 @@
 import { useEffect, useRef, useState } from 'react';
 import type { RackItem } from './Rack';
 
+export type ProductView = { label: string; file: string; w: number; h: number };
+
 export type JacketDetail = RackItem & {
   description: string;
   features: string[];
   fit: string;
   sizes: number[];
+  sizeLabels?: string[]; // defaults to clothing sizes
+  views?: ProductView[]; // explicit views (helmets: front, side, back); jackets derive front/back
+  category?: string;
 };
 
 const SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+
+export function viewsOf(item: JacketDetail): ProductView[] {
+  if (item.views?.length) return item.views;
+  const front = { label: 'Front', file: `rack/${item.id}-cut.webp`, w: item.w, h: item.h };
+  return item.back ? [front, { label: 'Back', file: `rack/${item.id}-back-cut.webp`, w: item.w, h: item.h }] : [front];
+}
 const BASE = import.meta.env.BASE_URL;
 
 type Props = {
@@ -25,7 +36,7 @@ type Props = {
 /** One product window, filled with whichever jacket is open: image (front/back), details, sizes, add to bag. */
 export default function ProductModal({ items, index, onClose, onNavigate, onAdd, onBuyNow, onSizeGuide, formatPrice }: Props) {
   const ref = useRef<HTMLDialogElement>(null);
-  const [view, setView] = useState<'front' | 'back'>('front');
+  const [view, setView] = useState(0);
   const [size, setSize] = useState('');
   const [hint, setHint] = useState('');
   const item = index === null ? null : items[index];
@@ -41,7 +52,7 @@ export default function ProductModal({ items, index, onClose, onNavigate, onAdd,
 
   // a fresh state for every product
   useEffect(() => {
-    setView('front');
+    setView(0);
     setSize('');
     setHint('');
   }, [index]);
@@ -82,23 +93,31 @@ export default function ProductModal({ items, index, onClose, onNavigate, onAdd,
       {item && index !== null && (
         <div className="pd">
           <div className="pd-media">
-            <img
-              key={`${item.id}-${view}`}
-              src={`${BASE}rack/${item.id}${view === 'back' ? '-back-cut' : '-cut'}.webp`}
-              alt={`${item.name}, ${view} view`}
-              width={item.w}
-              height={item.h}
-            />
-            {item.back && (
-              <div className="pd-views" role="group" aria-label="Choose a view">
-                <button type="button" aria-pressed={view === 'front'} onClick={() => setView('front')}>
-                  Front
-                </button>
-                <button type="button" aria-pressed={view === 'back'} onClick={() => setView('back')}>
-                  Back
-                </button>
-              </div>
-            )}
+            {(() => {
+              const views = viewsOf(item);
+              const v = views[Math.min(view, views.length - 1)];
+              return (
+                <>
+                  <img
+                    key={`${item.id}-${v.label}`}
+                    src={`${BASE}${v.file}`}
+                    alt={`${item.name}, ${v.label.toLowerCase()} view`}
+                    width={v.w}
+                    height={v.h}
+                    className={item.category === 'Helmets' ? 'is-gear' : undefined}
+                  />
+                  {views.length > 1 && (
+                    <div className="pd-views" role="group" aria-label="Choose a view">
+                      {views.map((option, k) => (
+                        <button key={option.label} type="button" aria-pressed={view === k} onClick={() => setView(k)}>
+                          {option.label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </>
+              );
+            })()}
           </div>
 
           <div className="pd-info">
@@ -138,7 +157,7 @@ export default function ProductModal({ items, index, onClose, onNavigate, onAdd,
                 </button>
               </legend>
               <div>
-                {SIZES.map((s, k) => {
+                {(item.sizeLabels ?? SIZES).map((s, k) => {
                   const inStock = Boolean(item.sizes[k]);
                   return (
                     <label key={s} className={inStock ? undefined : 'out'}>

@@ -1814,7 +1814,12 @@ footer {
   max-width: 440px;
   height: auto;
   filter: drop-shadow(0 22px 26px rgba(20, 30, 40, 0.18));
-  animation: pd-in 0.35s ease;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .pd-media img {
+    animation: pd-in 0.35s ease;
+  }
 }
 
 .pd-views {
@@ -2798,4 +2803,13 @@ footer {
   .product-info p {
     font-size: 11px;
   }
+}
+
+/* helmets: shown a little smaller than jackets so they sit naturally in the frame */
+.product-image img.is-cutout[src*='/gear/'] {
+  padding: 20% 14%;
+}
+
+.pd-media img.is-gear {
+  max-width: 360px;
 }

@@ -1,0 +1,738 @@
+[
+  {
+    "id": "bd-helmet-cobalt",
+    "name": "Black Diamond Helmet, Cobalt",
+    "brand": "Black Diamond",
+    "material": "Cobalt \u00b7 Black Diamond",
+    "price": 89,
+    "category": "Helmets",
+    "w": 230,
+    "h": 249,
+    "views": [
+      {
+        "label": "Front",
+        "file": "gear/bd-helmet-cobalt-front.webp",
+        "w": 230,
+        "h": 249
+      },
+      {
+        "label": "Side",
+        "file": "gear/bd-helmet-cobalt-side.webp",
+        "w": 252,
+        "h": 250
+      },
+      {
+        "label": "Back",
+        "file": "gear/bd-helmet-cobalt-back.webp",
+        "w": 198,
+        "h": 249
+      }
+    ],
+    "description": "A light, low-profile climbing helmet in cobalt blue with big side vents and an easy one-hand adjuster at the back.",
+    "features": [
+      "Vented shell",
+      "Rear adjustment dial",
+      "Headlamp clips",
+      "Padded straps"
+    ],
+    "fit": "Fits head sizes 50 to 58 cm (S/M) or 56 to 62 cm (M/L).",
+    "sizeLabels": [
+      "S/M",
+      "M/L"
+    ],
+    "sizes": [
+      1,
+      1
+    ]
+  },
+  {
+    "id": "bd-helmet-sage",
+    "name": "Black Diamond Helmet, Sage",
+    "brand": "Black Diamond",
+    "material": "Sage \u00b7 Black Diamond",
+    "price": 89,
+    "category": "Helmets",
+    "w": 221,
+    "h": 250,
+    "views": [
+      {
+        "label": "Front",
+        "file": "gear/bd-helmet-sage-front.webp",
+        "w": 221,
+        "h": 250
+      },
+      {
+        "label": "Side",
+        "file": "gear/bd-helmet-sage-side.webp",
+        "w": 242,
+        "h": 251
+      },
+      {
+        "label": "Back",
+        "file": "gear/bd-helmet-sage-back.webp",
+        "w": 178,
+        "h": 250
+      }
+    ],
+    "description": "The same low-profile climbing helmet in a soft sage green. Light enough to forget you are wearing it on long routes.",
+    "features": [
+      "Vented shell",
+      "Rear adjustment dial",
+      "Headlamp clips",
+      "Padded straps"
+    ],
+    "fit": "Fits head sizes 50 to 58 cm (S/M) or 56 to 62 cm (M/L).",
+    "sizeLabels": [
+      "S/M",
+      "M/L"
+    ],
+    "sizes": [
+      1,
+      0
+    ]
+  },
+  {
+    "id": "petzl-helmet-white",
+    "name": "Petzl Helmet, White",
+    "brand": "Petzl",
+    "material": "White \u00b7 Petzl",
+    "price": 79,
+    "category": "Helmets",
+    "w": 233,
+    "h": 253,
+    "views": [
+      {
+        "label": "Front",
+        "file": "gear/petzl-helmet-white-front.webp",
+        "w": 233,
+        "h": 253
+      },
+      {
+        "label": "Side",
+        "file": "gear/petzl-helmet-white-side.webp",
+        "w": 248,
+        "h": 253
+      },
+      {
+        "label": "Back",
+        "file": "gear/petzl-helmet-white-back.webp",
+        "w": 200,
+        "h": 252
+      }
+    ],
+    "description": "A clean white climbing helmet with a tough shell, wide vents and a cradle that adjusts quickly with gloves on.",
+    "features": [
+      "Durable shell",
+      "Wide side vents",
+      "Quick-adjust cradle",
+      "Headlamp clips"
+    ],
+    "fit": "Fits head sizes 50 to 58 cm (S/M) or 56 to 62 cm (M/L).",
+    "sizeLabels": [
+      "S/M",
+      "M/L"
+    ],
+    "sizes": [
+      1,
+      1
+    ]
+  },
+  {
+    "id": "wild-country-helmet-bone",
+    "name": "Wild Country Helmet, Bone and olive",
+    "brand": "Wild Country",
+    "material": "Bone and olive \u00b7 Wild Country",
+    "price": 95,
+    "category": "Helmets",
+    "w": 210,
+    "h": 160,
+    "views": [
+      {
+        "label": "Front",
+        "file": "gear/wild-country-helmet-bone-front.webp",
+        "w": 210,
+        "h": 160
+      },
+      {
+        "label": "Side",
+        "file": "gear/wild-country-helmet-bone-side.webp",
+        "w": 251,
+        "h": 177
+      },
+      {
+        "label": "Back",
+        "file": "gear/wild-country-helmet-bone-back.webp",
+        "w": 180,
+        "h": 175
+      }
+    ],
+    "description": "A two-tone climbing helmet in bone and olive, with a deep rear shell for extra coverage on mixed and alpine routes.",
+    "features": [
+      "Extended rear coverage",
+      "Two-tone shell",
+      "Rear adjustment dial",
+      "Vented crown"
+    ],
+    "fit": "Fits head sizes 50 to 58 cm (S/M) or 56 to 62 cm (M/L).",
+    "sizeLabels": [
+      "S/M",
+      "M/L"
+    ],
+    "sizes": [
+      0,
+      1
+    ]
+  },
+  {
+    "id": "polrware-alpine-helmet",
+    "name": "Polrware Alpine Helmet, Signal orange",
+    "brand": "Polrware",
+    "material": "Signal orange \u00b7 Polrware",
+    "price": 72,
+    "category": "Helmets",
+    "w": 232,
+    "h": 252,
+    "views": [
+      {
+        "label": "Front",
+        "file": "gear/polrware-alpine-helmet-front.webp",
+        "w": 232,
+        "h": 252
+      },
+      {
+        "label": "Side",
+        "file": "gear/polrware-alpine-helmet-side.webp",
+        "w": 254,
+        "h": 253
+      },
+      {
+        "label": "Back",
+        "file": "gear/polrware-alpine-helmet-back.webp",
+        "w": 201,
+        "h": 247
+      }
+    ],
+    "description": "Our own alpine helmet in signal orange, easy to spot on snow and rock. Wide vents keep you cool on the approach.",
+    "features": [
+      "High-visibility orange",
+      "Vented shell",
+      "Red buckle tabs",
+      "Rear adjustment dial"
+    ],
+    "fit": "Fits head sizes 50 to 58 cm (S/M) or 56 to 62 cm (M/L).",
+    "sizeLabels": [
+      "S/M",
+      "M/L"
+    ],
+    "sizes": [
+      1,
+      1
+    ]
+  },
+  {
+    "id": "outdoor-master-helmet-black",
+    "name": "Outdoor Master Helmet, Black",
+    "brand": "Outdoor Master",
+    "material": "Black \u00b7 Outdoor Master",
+    "price": 65,
+    "category": "Helmets",
+    "w": 232,
+    "h": 258,
+    "views": [
+      {
+        "label": "Front",
+        "file": "gear/outdoor-master-helmet-black-front.webp",
+        "w": 232,
+        "h": 258
+      },
+      {
+        "label": "Side",
+        "file": "gear/outdoor-master-helmet-black-side.webp",
+        "w": 256,
+        "h": 251
+      },
+      {
+        "label": "Back",
+        "file": "gear/outdoor-master-helmet-black-back.webp",
+        "w": 181,
+        "h": 249
+      }
+    ],
+    "description": "A matte black helmet with a sculpted shell and plenty of venting. A good everyday choice for crag days and via ferrata.",
+    "features": [
+      "Matte black shell",
+      "Sculpted vents",
+      "Rear adjustment dial",
+      "Padded straps"
+    ],
+    "fit": "Fits head sizes 50 to 58 cm (S/M) or 56 to 62 cm (M/L).",
+    "sizeLabels": [
+      "S/M",
+      "M/L"
+    ],
+    "sizes": [
+      1,
+      1
+    ]
+  },
+  {
+    "id": "smith-full-face-sand",
+    "name": "Smith Full-Face Helmet, Sand",
+    "brand": "Smith",
+    "material": "Sand \u00b7 Smith",
+    "price": 220,
+    "category": "Helmets",
+    "w": 236,
+    "h": 252,
+    "views": [
+      {
+        "label": "Front",
+        "file": "gear/smith-full-face-sand-front.webp",
+        "w": 236,
+        "h": 252
+      },
+      {
+        "label": "Side",
+        "file": "gear/smith-full-face-sand-side.webp",
+        "w": 260,
+        "h": 243
+      },
+      {
+        "label": "Back",
+        "file": "gear/smith-full-face-sand-back.webp",
+        "w": 197,
+        "h": 255
+      }
+    ],
+    "description": "A full-face helmet in sand with a peaked visor and a protective chin bar, built for fast, rough descents.",
+    "features": [
+      "Full-face coverage",
+      "Chin bar",
+      "Peaked visor",
+      "Vented shell"
+    ],
+    "fit": "Fits head sizes 50 to 58 cm (S/M) or 56 to 62 cm (M/L).",
+    "sizeLabels": [
+      "S/M",
+      "M/L"
+    ],
+    "sizes": [
+      0,
+      1
+    ]
+  },
+  {
+    "id": "polrware-trail-helmet",
+    "name": "Polrware Trail Helmet, Frost and sage",
+    "brand": "Polrware",
+    "material": "Frost and sage \u00b7 Polrware",
+    "price": 84,
+    "category": "Helmets",
+    "w": 210,
+    "h": 246,
+    "views": [
+      {
+        "label": "Front",
+        "file": "gear/polrware-trail-helmet-front.webp",
+        "w": 210,
+        "h": 246
+      },
+      {
+        "label": "Side",
+        "file": "gear/polrware-trail-helmet-side.webp",
+        "w": 248,
+        "h": 251
+      },
+      {
+        "label": "Back",
+        "file": "gear/polrware-trail-helmet-back.webp",
+        "w": 178,
+        "h": 161
+      }
+    ],
+    "description": "Our trail helmet in frost white with a sage rear and a short visor that keeps glare and snow off your goggles.",
+    "features": [
+      "Short visor",
+      "Extended rear coverage",
+      "Vented shell",
+      "Rear adjustment dial"
+    ],
+    "fit": "Fits head sizes 50 to 58 cm (S/M) or 56 to 62 cm (M/L).",
+    "sizeLabels": [
+      "S/M",
+      "M/L"
+    ],
+    "sizes": [
+      1,
+      1
+    ]
+  },
+  {
+    "id": "bd-helmet-jade",
+    "name": "Black Diamond Helmet, Jade",
+    "brand": "Black Diamond",
+    "material": "Jade \u00b7 Black Diamond",
+    "price": 89,
+    "category": "Helmets",
+    "w": 255,
+    "h": 275,
+    "views": [
+      {
+        "label": "Front",
+        "file": "gear/bd-helmet-jade-front.webp",
+        "w": 255,
+        "h": 275
+      },
+      {
+        "label": "Side",
+        "file": "gear/bd-helmet-jade-side.webp",
+        "w": 276,
+        "h": 274
+      },
+      {
+        "label": "Back",
+        "file": "gear/bd-helmet-jade-back.webp",
+        "w": 211,
+        "h": 273
+      }
+    ],
+    "description": "The low-profile climbing helmet in a fresh jade green, with matching straps and big side vents for warm approaches.",
+    "features": [
+      "Vented shell",
+      "Colour-matched straps",
+      "Rear adjustment dial",
+      "Headlamp clips"
+    ],
+    "fit": "Fits head sizes 50 to 58 cm (S/M) or 56 to 62 cm (M/L).",
+    "sizeLabels": [
+      "S/M",
+      "M/L"
+    ],
+    "sizes": [
+      1,
+      1
+    ]
+  },
+  {
+    "id": "bd-helmet-ultra-blue",
+    "name": "Black Diamond Helmet, Ultra blue",
+    "brand": "Black Diamond",
+    "material": "Ultra blue \u00b7 Black Diamond",
+    "price": 89,
+    "category": "Helmets",
+    "w": 244,
+    "h": 272,
+    "views": [
+      {
+        "label": "Front",
+        "file": "gear/bd-helmet-ultra-blue-front.webp",
+        "w": 244,
+        "h": 272
+      },
+      {
+        "label": "Side",
+        "file": "gear/bd-helmet-ultra-blue-side.webp",
+        "w": 250,
+        "h": 273
+      },
+      {
+        "label": "Back",
+        "file": "gear/bd-helmet-ultra-blue-back.webp",
+        "w": 161,
+        "h": 272
+      }
+    ],
+    "description": "A bright ultra blue version of the low-profile climbing helmet. Easy to spot on a busy crag or a snowy ridge.",
+    "features": [
+      "Vented shell",
+      "Rear adjustment dial",
+      "Headlamp clips",
+      "Padded straps"
+    ],
+    "fit": "Fits head sizes 50 to 58 cm (S/M) or 56 to 62 cm (M/L).",
+    "sizeLabels": [
+      "S/M",
+      "M/L"
+    ],
+    "sizes": [
+      0,
+      1
+    ]
+  },
+  {
+    "id": "petzl-helmet-gloss",
+    "name": "Petzl Helmet, Gloss white",
+    "brand": "Petzl",
+    "material": "Gloss white \u00b7 Petzl",
+    "price": 82,
+    "category": "Helmets",
+    "w": 247,
+    "h": 241,
+    "views": [
+      {
+        "label": "Front",
+        "file": "gear/petzl-helmet-gloss-front.webp",
+        "w": 247,
+        "h": 241
+      },
+      {
+        "label": "Side",
+        "file": "gear/petzl-helmet-gloss-side.webp",
+        "w": 275,
+        "h": 241
+      },
+      {
+        "label": "Back",
+        "file": "gear/petzl-helmet-gloss-back.webp",
+        "w": 210,
+        "h": 241
+      }
+    ],
+    "description": "A gloss white climbing helmet with a smooth, rounded shell and wide vents. Clean looks for long alpine days.",
+    "features": [
+      "Gloss shell",
+      "Wide side vents",
+      "Quick-adjust cradle",
+      "Headlamp clips"
+    ],
+    "fit": "Fits head sizes 50 to 58 cm (S/M) or 56 to 62 cm (M/L).",
+    "sizeLabels": [
+      "S/M",
+      "M/L"
+    ],
+    "sizes": [
+      1,
+      1
+    ]
+  },
+  {
+    "id": "blue-ice-helmet-black",
+    "name": "Blue Ice Helmet, Black",
+    "brand": "Blue Ice",
+    "material": "Black \u00b7 Blue Ice",
+    "price": 99,
+    "category": "Helmets",
+    "w": 244,
+    "h": 236,
+    "views": [
+      {
+        "label": "Front",
+        "file": "gear/blue-ice-helmet-black-front.webp",
+        "w": 244,
+        "h": 236
+      },
+      {
+        "label": "Side",
+        "file": "gear/blue-ice-helmet-black-side.webp",
+        "w": 266,
+        "h": 234
+      },
+      {
+        "label": "Back",
+        "file": "gear/blue-ice-helmet-black-back.webp",
+        "w": 166,
+        "h": 234
+      }
+    ],
+    "description": "A black alpine helmet with an open, lattice-style shell for airflow and red accents at the back for visibility.",
+    "features": [
+      "Lattice venting",
+      "Red rear accents",
+      "Rear adjustment dial",
+      "Lightweight build"
+    ],
+    "fit": "Fits head sizes 50 to 58 cm (S/M) or 56 to 62 cm (M/L).",
+    "sizeLabels": [
+      "S/M",
+      "M/L"
+    ],
+    "sizes": [
+      1,
+      0
+    ]
+  },
+  {
+    "id": "smith-helmet-cream",
+    "name": "Smith Helmet, Cream",
+    "brand": "Smith",
+    "material": "Cream \u00b7 Smith",
+    "price": 135,
+    "category": "Helmets",
+    "w": 260,
+    "h": 256,
+    "views": [
+      {
+        "label": "Front",
+        "file": "gear/smith-helmet-cream-front.webp",
+        "w": 260,
+        "h": 256
+      },
+      {
+        "label": "Side",
+        "file": "gear/smith-helmet-cream-side.webp",
+        "w": 298,
+        "h": 254
+      },
+      {
+        "label": "Back",
+        "file": "gear/smith-helmet-cream-back.webp",
+        "w": 200,
+        "h": 183
+      }
+    ],
+    "description": "A cream helmet with a removable peak and a deep, protective rear shell. Built for ski touring and trail days.",
+    "features": [
+      "Removable peak",
+      "Deep rear coverage",
+      "Vented shell",
+      "Rear adjustment dial"
+    ],
+    "fit": "Fits head sizes 50 to 58 cm (S/M) or 56 to 62 cm (M/L).",
+    "sizeLabels": [
+      "S/M",
+      "M/L"
+    ],
+    "sizes": [
+      1,
+      1
+    ]
+  },
+  {
+    "id": "wild-country-helmet-forest",
+    "name": "Wild Country Helmet, Forest green",
+    "brand": "Wild Country",
+    "material": "Forest green \u00b7 Wild Country",
+    "price": 95,
+    "category": "Helmets",
+    "w": 246,
+    "h": 256,
+    "views": [
+      {
+        "label": "Front",
+        "file": "gear/wild-country-helmet-forest-front.webp",
+        "w": 246,
+        "h": 256
+      },
+      {
+        "label": "Side",
+        "file": "gear/wild-country-helmet-forest-side.webp",
+        "w": 262,
+        "h": 252
+      },
+      {
+        "label": "Back",
+        "file": "gear/wild-country-helmet-forest-back.webp",
+        "w": 165,
+        "h": 249
+      }
+    ],
+    "description": "A forest green climbing helmet with a grey trim band and extended rear coverage for mixed and alpine routes.",
+    "features": [
+      "Extended rear coverage",
+      "Grey trim band",
+      "Rear adjustment dial",
+      "Vented crown"
+    ],
+    "fit": "Fits head sizes 50 to 58 cm (S/M) or 56 to 62 cm (M/L).",
+    "sizeLabels": [
+      "S/M",
+      "M/L"
+    ],
+    "sizes": [
+      1,
+      1
+    ]
+  },
+  {
+    "id": "outdoor-master-helmet-midnight",
+    "name": "Outdoor Master Helmet, Midnight",
+    "brand": "Outdoor Master",
+    "material": "Midnight \u00b7 Outdoor Master",
+    "price": 69,
+    "category": "Helmets",
+    "w": 259,
+    "h": 244,
+    "views": [
+      {
+        "label": "Front",
+        "file": "gear/outdoor-master-helmet-midnight-front.webp",
+        "w": 259,
+        "h": 244
+      },
+      {
+        "label": "Side",
+        "file": "gear/outdoor-master-helmet-midnight-side.webp",
+        "w": 296,
+        "h": 244
+      },
+      {
+        "label": "Back",
+        "file": "gear/outdoor-master-helmet-midnight-back.webp",
+        "w": 208,
+        "h": 235
+      }
+    ],
+    "description": "A midnight black helmet with a short visor and sculpted vents. Works for crag days, via ferrata and ski touring.",
+    "features": [
+      "Short visor",
+      "Sculpted vents",
+      "Rear adjustment dial",
+      "Padded straps"
+    ],
+    "fit": "Fits head sizes 50 to 58 cm (S/M) or 56 to 62 cm (M/L).",
+    "sizeLabels": [
+      "S/M",
+      "M/L"
+    ],
+    "sizes": [
+      1,
+      1
+    ]
+  },
+  {
+    "id": "mammut-helmet-bone",
+    "name": "Mammut Helmet, Bone and orange",
+    "brand": "Mammut",
+    "material": "Bone and orange \u00b7 Mammut",
+    "price": 109,
+    "category": "Helmets",
+    "w": 230,
+    "h": 180,
+    "views": [
+      {
+        "label": "Front",
+        "file": "gear/mammut-helmet-bone-front.webp",
+        "w": 230,
+        "h": 180
+      },
+      {
+        "label": "Side",
+        "file": "gear/mammut-helmet-bone-side.webp",
+        "w": 258,
+        "h": 169
+      },
+      {
+        "label": "Back",
+        "file": "gear/mammut-helmet-bone-back.webp",
+        "w": 162,
+        "h": 168
+      }
+    ],
+    "description": "A bone white helmet with orange vent trims and an olive rear band. Bright enough to stand out in flat light.",
+    "features": [
+      "Orange vent trims",
+      "Olive rear band",
+      "Vented shell",
+      "Rear adjustment dial"
+    ],
+    "fit": "Fits head sizes 50 to 58 cm (S/M) or 56 to 62 cm (M/L).",
+    "sizeLabels": [
+      "S/M",
+      "M/L"
+    ],
+    "sizes": [
+      0,
+      1
+    ]
+  }
+]
