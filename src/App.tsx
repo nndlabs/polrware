@@ -9,8 +9,10 @@ import {
   useRef,
   useState,
 } from 'react';
-import heroImage from './assets/polrware-hero.png';
-import editorialImage from './assets/polrware-editorial.png';
+import hero900 from './assets/hero-900.webp';
+import hero1600 from './assets/hero-1600.webp';
+import editorial1000 from './assets/editorial-1000.webp';
+import editorial2000 from './assets/editorial-2000.webp';
 import rackCatalog from './rack-catalog.json';
 import ProductModal, { type JacketDetail } from './ProductModal';
 import CheckoutModal, { type CheckoutLine } from './CheckoutModal';
@@ -162,7 +164,7 @@ const rackProducts: Product[] = rackItems.map((item) => ({
   name: item.name,
   type: item.material,
   price: item.price,
-  image: `${BASE}rack/${item.id}-cut.png`,
+  image: `${BASE}rack/${item.id}-cut.webp`,
   category: 'Jackets',
   cutout: true,
 }));
@@ -203,6 +205,8 @@ export default function App() {
   const [checkoutNote, setCheckoutNote] = useState(false);
   const [infoKey, setInfoKey] = useState<InfoKey | null>(null);
   const [viewIndex, setViewIndex] = useState<number | null>(null);
+  const [rackNear, setRackNear] = useState(false);
+  const rackSectionRef = useRef<HTMLElement>(null);
   const [checkoutLines, setCheckoutLines] = useState<CheckoutLine[] | null>(null);
   const [checkoutFromBag, setCheckoutFromBag] = useState(false);
 
@@ -348,6 +352,15 @@ export default function App() {
     setCheckoutFromBag(false);
     setCheckoutLines([line]);
   };
+
+  // start loading the 3D rail one screen before it scrolls into view
+  useEffect(() => {
+    const el = rackSectionRef.current;
+    if (!el || rackNear) return;
+    const io = new IntersectionObserver(([entry]) => entry.isIntersecting && setRackNear(true), { rootMargin: '100% 0px' });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [rackNear]);
 
   // scroll reveal: elements marked data-reveal rise into place the first time they enter the viewport
   useEffect(() => {
@@ -506,17 +519,23 @@ export default function App() {
               <span>tested</span>
             </div>
             <img
-              src={heroImage}
+              src={hero1600}
+              srcSet={`${hero900} 900w, ${hero1600} 1024w`}
+              sizes="(max-width: 900px) 100vw, 54vw"
               alt="Model wearing Polrware black winter outerwear in the snow"
+              width={1024}
+              height={1280}
               fetchPriority="high"
+              decoding="async"
             />
           </div>
         </section>
 
-        <section className="intro" id="story" aria-label="The rail" data-rack-track>
+        <section className="intro" id="story" aria-label="The rail" data-rack-track ref={rackSectionRef}>
           <div className="intro-sticky">
           <div className="intro-rack">
             <Suspense fallback={<div className="rack-stage" />}>
+              {rackNear ? (
               <Rack
                 items={rackItems}
                 onAdd={(item) => addToBag(item.name)}
@@ -524,6 +543,9 @@ export default function App() {
                 activeId={viewIndex !== null ? rackItems[viewIndex].id : null}
                 formatPrice={(value) => money.format(value)}
               />
+              ) : (
+                <div className="rack-stage" />
+              )}
             </Suspense>
           </div>
           </div>
@@ -606,7 +628,16 @@ export default function App() {
         </section>
 
         <section className="campaign" id="campaign">
-          <img src={editorialImage} alt="Polrware silver puffer campaign in the mountains" loading="lazy" />
+          <img
+            src={editorial2000}
+            srcSet={`${editorial1000} 1000w, ${editorial2000} 1536w`}
+            sizes="100vw"
+            alt="Polrware silver puffer campaign in the mountains"
+            width={1536}
+            height={1024}
+            loading="lazy"
+            decoding="async"
+          />
           <div className="campaign-overlay" />
           <div className="campaign-top">
             <span>Lyngen Alps, Norway</span>

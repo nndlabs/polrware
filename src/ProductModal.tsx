@@ -84,7 +84,7 @@ export default function ProductModal({ items, index, onClose, onNavigate, onAdd,
           <div className="pd-media">
             <img
               key={`${item.id}-${view}`}
-              src={`${BASE}rack/${item.id}${view === 'back' ? '-back-cut' : '-cut'}.png`}
+              src={`${BASE}rack/${item.id}${view === 'back' ? '-back-cut' : '-cut'}.webp`}
               alt={`${item.name}, ${view} view`}
               width={item.w}
               height={item.h}
