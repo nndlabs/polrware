@@ -22,3 +22,4 @@ logs/
 
 # Pinterest reference images: third-party copyright, never publish
 public/review/
+.vercel

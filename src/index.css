@@ -50,7 +50,7 @@
 
 .hero {
   position: relative;
-  min-height: 860px;
+  min-height: 680px;
   height: 100svh;
   overflow: hidden;
   background: var(--ice);
@@ -598,7 +598,7 @@
 
 .product-image {
   position: relative;
-  height: 510px;
+  height: clamp(340px, 34vw, 560px);
   overflow: hidden;
   background: #e8e9e5;
 }
@@ -2633,6 +2633,65 @@ footer {
   }
 
   .pd-actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- responsive: tablets, small laptops, landscape phones ---------- */
+@media (max-width: 1200px) and (min-width: 901px) {
+  .product-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .product-image {
+    height: clamp(340px, 42vw, 520px);
+  }
+}
+
+@media (max-width: 900px) and (min-width: 621px) {
+  .product-image {
+    height: clamp(320px, 62vw, 520px);
+  }
+}
+
+/* short, wide screens (landscape phones, small laptops) */
+@media (max-height: 560px) and (orientation: landscape) {
+  .hero {
+    min-height: 520px;
+  }
+
+  .hero-copy {
+    top: 54%;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(44px, 9vh, 72px);
+  }
+
+  .intro-sticky {
+    padding-top: 72px;
+  }
+
+  .intro-sticky .rack-stage {
+    max-height: 64svh;
+  }
+
+  .pd-media {
+    min-height: 240px;
+  }
+}
+
+/* very small phones */
+@media (max-width: 360px) {
+  .hero-copy h1 {
+    font-size: 48px;
+  }
+
+  .nav-bag {
+    padding-left: 12px;
+  }
+
+  .co-row {
     grid-template-columns: 1fr;
   }
 }
