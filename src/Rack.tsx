@@ -433,6 +433,7 @@ type Hanger = {
   proxy: THREE.Mesh;
   df: DistField;
   hem: number;
+  y0: number; // height of this jacket's rail (0 for the top rail)
   intro: boolean;
   sp: { x: Spring; z: Spring; s: Spring; turn: Spring; sway: Spring };
 };
@@ -448,6 +449,15 @@ export default function Rack({ items, onAdd, formatPrice, onPick, activeId }: Pr
   const [selected, setSelected] = useState(-1);
   const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState('');
+  // phone-width screens stack the jackets on two rails so every one is visible at once
+  const [rows, setRows] = useState(() => (typeof window !== 'undefined' && window.innerWidth < 700 ? 2 : 1));
+  useEffect(() => {
+    const wrap = wrapRef.current;
+    if (!wrap) return;
+    const ro = new ResizeObserver(() => setRows(wrap.clientWidth < 700 && items.length > 4 ? 2 : 1));
+    ro.observe(wrap);
+    return () => ro.disconnect();
+  }, [items.length]);
 
   useEffect(() => {
     const wrap = wrapRef.current;
@@ -477,19 +487,26 @@ export default function Rack({ items, onAdd, formatPrice, onPick, activeId }: Pr
     });
     const heights = sizes.map((sz) => sz.h);
     const maxHem = JTOP + Math.max(1, ...heights);
-    const span = Math.min(0.74 * N, 8.4); // each jacket gets clear air on either side
+    // rails: one long rail, or (phones) several stacked rails with the jackets shared out between them
+    const perRow = Math.ceil(N / rows);
+    const rowOf = (i: number) => Math.floor(i / perRow);
+    const colOf = (i: number) => i % perRow;
+    const rowCount = (r: number) => Math.min(perRow, N - r * perRow);
+    const ROW_GAP = maxHem + 0.42;
+    const span = Math.min((rows > 1 ? 0.62 : 0.74) * perRow, 8.4); // each jacket gets clear air on either side
     const slotHalf = Math.max(0.6, span / 2);
     const bracketX = slotHalf + 0.2;
     const railHalf = bracketX + 0.4;
-    const hoverW = N > 1 ? Math.max(1.5, (FRONT_W * (N - 1)) / Math.max(0.4, 2 * slotHalf - FRONT_W)) : 1;
-    const camY = (RAIL_TOP - maxHem) / 2;
-    const hNeed = (RAIL_TOP + maxHem) / 0.9;
+    const hoverWFor = (n: number) => (n > 1 ? Math.max(1.5, (FRONT_W * (n - 1)) / Math.max(0.4, 2 * slotHalf - FRONT_W)) : 1);
+    const contentH = RAIL_TOP + (rows - 1) * ROW_GAP + maxHem;
+    const camY = RAIL_TOP - contentH / 2;
+    const hNeed = contentH / 0.9;
     const wNeed = Math.max(3.6, (2 * railHalf + 0.1) / 0.94);
-    const spacing = (2 * slotHalf) / N;
-    // the camera frames a handful of jackets at a time and glides along the rail as the page scrolls
-    const track = wrap.closest<HTMLElement>('[data-rack-track]');
-    // phones: ~3 jackets in view; larger screens: ~6
+    const spacing = (2 * slotHalf) / perRow;
+    // one rail: the camera frames ~6 jackets and pans with scroll; stacked rails: everything in view
+    const track = rows === 1 ? wrap.closest<HTMLElement>('[data-rack-track]') : null;
     const frameW = (width: number) => (track ? Math.min(wNeed, (width < 700 ? 2.8 : 5.6) * spacing + 0.9) : wNeed);
+    wrap.style.aspectRatio = rows > 1 ? String(wNeed / hNeed) : '';
     let camX = 0;
     let panRange = 0;
     let visibleW = 1;
@@ -508,14 +525,24 @@ export default function Rack({ items, onAdd, formatPrice, onPick, activeId }: Pr
     const fill = new THREE.DirectionalLight(0xf4f6ff, 0.5);
     fill.position.set(3.5, 0.8, 4);
     scene.add(fill);
-    scene.add(buildRail(railHalf, bracketX));
+    for (let r = 0; r < rows; r++) {
+      const rail = buildRail(railHalf, bracketX);
+      rail.position.y = -r * ROW_GAP;
+      scene.add(rail);
+    }
 
+    // slot position along its own rail; a hovered jacket only makes room on its own rail
     const slotX = (i: number, h: number) => {
-      const k = h >= 0 ? hoverW : 1;
-      const u = (slotHalf * 2) / (N - 1 + k);
-      let acc = -slotHalf;
-      for (let j = 0; j < i; j++) acc += (j === h ? k : 1) * u;
-      return acc + ((i === h ? k : 1) * u) / 2;
+      const r = rowOf(i);
+      const n = rowCount(r);
+      const c = colOf(i);
+      const hc = h >= 0 && rowOf(h) === r ? colOf(h) : -1;
+      const k = hc >= 0 ? hoverWFor(n) : 1;
+      const used = n === perRow ? slotHalf : (slotHalf * n) / perRow; // a short last row stays centred
+      const u = (used * 2) / (n - 1 + k);
+      let acc = -used;
+      for (let j = 0; j < c; j++) acc += (j === hc ? k : 1) * u;
+      return acc + ((c === hc ? k : 1) * u) / 2;
     };
 
     let hoverIdx = -1;
@@ -729,6 +756,7 @@ export default function Rack({ items, onAdd, formatPrice, onPick, activeId }: Pr
           proxy.layers.set(1);
           proxy.userData.index = i;
           turn.add(new THREE.Mesh(geo.front, mat(map, 0.8)), new THREE.Mesh(geo.back, mat(backMap, backImg ? 0.78 : 0.62)), buildHanger(fitHanger(sizes[i].w, height, df), woodMat, chromeMat), proxy);
+          pivot.position.y = -rowOf(i) * ROW_GAP;
           scene.add(pivot);
           return {
             i,
@@ -738,6 +766,7 @@ export default function Rack({ items, onAdd, formatPrice, onPick, activeId }: Pr
             proxy,
             df,
             hem: -(JTOP + height),
+            y0: -rowOf(i) * ROW_GAP,
             intro: !reduce,
             sp: {
               x: new Spring(slotX(i, -1), 180, 22, reduce),
@@ -799,7 +828,7 @@ export default function Rack({ items, onAdd, formatPrice, onPick, activeId }: Pr
             s.sway.step(h);
           }
         }
-        hg.pivot.position.set(s.x.v, 0, s.z.v);
+        hg.pivot.position.set(s.x.v, hg.y0, s.z.v);
         hg.pivot.scale.setScalar(s.s.v);
         // perspective correction: offset each jacket's turn by its angle to the camera, so jackets at the ends of a
         // long rail look as full as the ones in the middle, and a hovered jacket faces the viewer squarely
@@ -808,7 +837,7 @@ export default function Rack({ items, onAdd, formatPrice, onPick, activeId }: Pr
       }
       const act = activeIdx();
       if (act >= 0 && hangers[act] && tagRef.current) {
-        tmp.set(hangers[act].pivot.position.x, hangers[act].hem - 0.16, 0).project(camera);
+        tmp.set(hangers[act].pivot.position.x, hangers[act].y0 + hangers[act].hem - 0.16, 0).project(camera);
         tagRef.current.style.transform = `translate(${((tmp.x * 0.5 + 0.5) * W).toFixed(1)}px, ${((-tmp.y * 0.5 + 0.5) * H).toFixed(1)}px) translateX(-50%)`;
       }
       renderer.render(scene, camera);
@@ -844,7 +873,7 @@ export default function Rack({ items, onAdd, formatPrice, onPick, activeId }: Pr
       envTex.dispose();
       renderer.dispose();
     };
-  }, [items]);
+  }, [items, rows]);
 
   useEffect(() => {
     if (!onPick) return;
@@ -902,7 +931,7 @@ export default function Rack({ items, onAdd, formatPrice, onPick, activeId }: Pr
         ) : (
           <p className="rack-hint">
             <span className="hint-pointer">Hover a jacket to turn it. Click it for details.</span>
-            <span className="hint-touch">Swipe the rail. Tap a jacket for details.</span>
+            <span className="hint-touch">Tap a jacket for details.</span>
           </p>
         )}
       </div>
