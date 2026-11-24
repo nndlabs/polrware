@@ -488,9 +488,14 @@ export default function Rack({ items, onAdd, formatPrice, onPick, activeId }: Pr
     const spacing = (2 * slotHalf) / N;
     // the camera frames a handful of jackets at a time and glides along the rail as the page scrolls
     const track = wrap.closest<HTMLElement>('[data-rack-track]');
-    const frameW = (aspect: number) => (track ? Math.min(wNeed, (aspect < 1 ? 2.6 : 5.6) * spacing + 0.9) : wNeed);
+    // phones: ~3 jackets in view; larger screens: ~6
+    const frameW = (width: number) => (track ? Math.min(wNeed, (width < 700 ? 2.8 : 5.6) * spacing + 0.9) : wNeed);
     let camX = 0;
     let panRange = 0;
+    let visibleW = 1;
+    let dragX = -Infinity; // swipe position on phones (starts at the left end of the rail)
+    let dragStart: { x: number; cam: number } | null = null;
+    let dragged = false;
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(FOV, 1, 0.1, 200);
@@ -569,13 +574,13 @@ export default function Rack({ items, onAdd, formatPrice, onPick, activeId }: Pr
       renderer.setSize(W, H, false);
       const aspect = W / H;
       const t = Math.tan(THREE.MathUtils.degToRad(FOV / 2));
-      const fw = frameW(aspect);
+      const fw = frameW(W);
       const D = Math.max(hNeed / (2 * t), fw / (aspect * 2 * t));
       camera.aspect = aspect;
       camera.position.set(camX, camY, D);
       camera.lookAt(camX, camY, 0);
       camera.updateProjectionMatrix();
-      const visibleW = 2 * D * t * aspect;
+      visibleW = 2 * D * t * aspect;
       panRange = Math.max(0, railHalf + 0.25 - visibleW / 2);
     };
     const ro = new ResizeObserver(scheduleResize);
@@ -620,7 +625,24 @@ export default function Rack({ items, onAdd, formatPrice, onPick, activeId }: Pr
       window.clearTimeout(leaveTimer);
       leaveTimer = window.setTimeout(() => hover(-1), 90);
     };
+    const onDown = (e: PointerEvent) => {
+      dragStart = { x: e.clientX, cam: clamp(dragX, -panRange, panRange) };
+      dragged = false;
+    };
+    const onDrag = (e: PointerEvent) => {
+      if (!dragStart) return;
+      const dx = e.clientX - dragStart.x;
+      if (Math.abs(dx) > 6) dragged = true;
+      dragX = dragStart.cam - dx * (visibleW / W);
+    };
+    const onUp = () => {
+      dragStart = null;
+    };
     const onClick = (e: MouseEvent) => {
+      if (dragged) {
+        dragged = false; // a swipe is not a tap
+        return;
+      }
       const i = pick(e);
       if (onPickRef.current) {
         if (i >= 0) {
@@ -634,6 +656,10 @@ export default function Rack({ items, onAdd, formatPrice, onPick, activeId }: Pr
     canvas.addEventListener('pointermove', onMove);
     canvas.addEventListener('pointerleave', onLeave);
     canvas.addEventListener('click', onClick);
+    canvas.addEventListener('pointerdown', onDown);
+    canvas.addEventListener('pointermove', onDrag);
+    window.addEventListener('pointerup', onUp);
+    canvas.addEventListener('pointercancel', onUp);
 
     /* build the jackets */
     const woodMat = new THREE.MeshPhysicalMaterial({
@@ -745,8 +771,16 @@ export default function Rack({ items, onAdd, formatPrice, onPick, activeId }: Pr
       // scroll-linked pan: progress through the pinned section moves the camera from one end of the rail to the other
       if (track && panRange > 0) {
         const r = track.getBoundingClientRect();
-        const progress = clamp(-r.top / Math.max(1, r.height - window.innerHeight), 0, 1);
-        const target = -panRange + 2 * panRange * progress;
+        let target: number;
+        if (r.height > window.innerHeight * 1.3) {
+          // pinned layout (tablet/desktop): scroll progress drives the pan
+          const progress = clamp(-r.top / Math.max(1, r.height - window.innerHeight), 0, 1);
+          target = -panRange + 2 * panRange * progress;
+        } else {
+          // phone layout: swipe the rail sideways
+          dragX = clamp(dragX, -panRange, panRange);
+          target = dragX;
+        }
         camX += (target - camX) * Math.min(1, dt * 9);
         camera.position.x = camX;
         camera.lookAt(camX, camY, 0);
@@ -793,6 +827,10 @@ export default function Rack({ items, onAdd, formatPrice, onPick, activeId }: Pr
       canvas.removeEventListener('pointermove', onMove);
       canvas.removeEventListener('pointerleave', onLeave);
       canvas.removeEventListener('click', onClick);
+      canvas.removeEventListener('pointerdown', onDown);
+      canvas.removeEventListener('pointermove', onDrag);
+      window.removeEventListener('pointerup', onUp);
+      canvas.removeEventListener('pointercancel', onUp);
       controls.current = null;
       scene.traverse((o) => {
         if (o instanceof THREE.Mesh) {
@@ -862,7 +900,10 @@ export default function Rack({ items, onAdd, formatPrice, onPick, activeId }: Pr
             </div>
           </>
         ) : (
-          <p className="rack-hint">Hover a jacket to turn it. Click it for details.</p>
+          <p className="rack-hint">
+            <span className="hint-pointer">Hover a jacket to turn it. Click it for details.</span>
+            <span className="hint-touch">Swipe the rail. Tap a jacket for details.</span>
+          </p>
         )}
       </div>
     </div>
