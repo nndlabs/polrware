@@ -41,6 +41,7 @@ const otherProducts: Product[] = [];
 
 const navLinks = [
   { id: 'shop', label: 'Shop' },
+  { id: 'helmets', label: 'Helmets' },
   { id: 'campaign', label: 'Campaign' },
   { id: 'story', label: 'Our story' },
   { id: 'footer', label: 'Contact' },
@@ -237,6 +238,15 @@ export default function App() {
     activeCategory === 'All'
       ? products
       : products.filter((product) => product.category === activeCategory);
+  // shop grid split into labelled groups (Jackets, Helmets...) so every category is easy to find
+  const shopGroups = categories
+    .filter((category) => category !== 'All')
+    .map((category) => ({
+      category,
+      id: category.toLowerCase(),
+      items: filteredProducts.filter((product) => product.category === category),
+    }))
+    .filter((group) => group.items.length > 0);
   const bagCount = bag.reduce((total, line) => total + line.qty, 0);
   const subtotal = bag.reduce(
     (total, line) => total + (productByName(line.name)?.price ?? 0) * line.qty,
@@ -472,7 +482,15 @@ export default function App() {
                 <a
                   href={`#${link.id}`}
                   aria-current={activeSection === link.id ? 'true' : undefined}
-                  onClick={() => setMenuOpen(false)}
+                  onClick={(event) => {
+                    setMenuOpen(false);
+                    if (link.id === 'helmets' && activeCategory !== 'All' && activeCategory !== 'Helmets') {
+                      // the helmet grid is hidden by the current filter: show it, then jump to it
+                      event.preventDefault();
+                      setActiveCategory('All');
+                      requestAnimationFrame(() => document.getElementById('helmets')?.scrollIntoView());
+                    }
+                  }}
                 >
                   {link.label}
                 </a>
@@ -586,59 +604,68 @@ export default function App() {
           </div>
           )}
 
-          <div className="product-grid">
-            {filteredProducts.map((product, index) => (
-              <article
-                className="product-card"
-                key={product.name}
-                data-reveal
-                style={{ '--d': `${(index % 4) * 80}ms` } as CSSProperties}
-              >
-                <div className="product-image">
-                  <span className="product-number">{String(index + 1).padStart(2, '0')}</span>
-                  <button
-                    type="button"
-                    className={`favorite ${favorites.includes(product.name) ? 'active' : ''}`}
-                    onClick={() => toggleFavorite(product.name)}
-                    aria-pressed={favorites.includes(product.name)}
-                    aria-label={`Save ${product.name}`}
+          {shopGroups.map((group) => (
+            <div className="shop-group" id={group.id} key={group.category}>
+              {shopGroups.length > 1 || group.category !== 'Jackets' ? (
+                <h3 className="shop-group-title" data-reveal>
+                  {group.category} <span>{group.items.length}</span>
+                </h3>
+              ) : null}
+              <div className="product-grid">
+                {group.items.map((product, index) => (
+                  <article
+                    className="product-card"
+                    key={product.name}
+                    data-reveal
+                    style={{ '--d': `${(index % 4) * 80}ms` } as CSSProperties}
                   >
-                    <span aria-hidden="true">{favorites.includes(product.name) ? '♥' : '♡'}</span>
-                  </button>
-                  <button
-                    type="button"
-                    className="product-open"
-                    onClick={() => openProduct(product.name)}
-                    aria-label={`View ${product.name}`}
-                  >
-                    <img
-                      className={product.cutout ? 'is-cutout' : undefined}
-                      src={product.image}
-                      alt=""
-                      loading="lazy"
-                      width={1000}
-                      height={1250}
-                    />
-                  </button>
-                  <button
-                    type="button"
-                    className="quick-add"
-                    onClick={() => addToBag(product.name)}
-                    aria-label={`Add ${product.name} to bag`}
-                  >
-                    Quick add <span aria-hidden="true">+</span>
-                  </button>
-                </div>
-                <div className="product-info">
-                  <div>
-                    <h3>{product.name}</h3>
-                    <p>{product.type}</p>
-                  </div>
-                  <strong>{money.format(product.price)}</strong>
-                </div>
-              </article>
-            ))}
-          </div>
+                    <div className="product-image">
+                      <span className="product-number">{String(index + 1).padStart(2, '0')}</span>
+                      <button
+                        type="button"
+                        className={`favorite ${favorites.includes(product.name) ? 'active' : ''}`}
+                        onClick={() => toggleFavorite(product.name)}
+                        aria-pressed={favorites.includes(product.name)}
+                        aria-label={`Save ${product.name}`}
+                      >
+                        <span aria-hidden="true">{favorites.includes(product.name) ? '♥' : '♡'}</span>
+                      </button>
+                      <button
+                        type="button"
+                        className="product-open"
+                        onClick={() => openProduct(product.name)}
+                        aria-label={`View ${product.name}`}
+                      >
+                        <img
+                          className={product.cutout ? 'is-cutout' : undefined}
+                          src={product.image}
+                          alt=""
+                          loading="lazy"
+                          width={1000}
+                          height={1250}
+                        />
+                      </button>
+                      <button
+                        type="button"
+                        className="quick-add"
+                        onClick={() => addToBag(product.name)}
+                        aria-label={`Add ${product.name} to bag`}
+                      >
+                        Quick add <span aria-hidden="true">+</span>
+                      </button>
+                    </div>
+                    <div className="product-info">
+                      <div>
+                        <h3>{product.name}</h3>
+                        <p>{product.type}</p>
+                      </div>
+                      <strong>{money.format(product.price)}</strong>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          ))}
         </section>
 
         <section className="campaign" id="campaign">
