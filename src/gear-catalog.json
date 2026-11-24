@@ -734,5 +734,585 @@
       0,
       1
     ]
+  },
+  {
+    "id": "polrware-moss-wedge-boot",
+    "name": "Polrware Moss Wedge Boot, Moss suede",
+    "brand": "Polrware",
+    "material": "Moss suede \u00b7 Polrware",
+    "price": 145,
+    "category": "Boots",
+    "w": 344,
+    "h": 215,
+    "views": [
+      {
+        "label": "Side",
+        "file": "gear/polrware-moss-wedge-boot-side.webp",
+        "w": 344,
+        "h": 215
+      },
+      {
+        "label": "Front",
+        "file": "gear/polrware-moss-wedge-boot-front.webp",
+        "w": 143,
+        "h": 216
+      },
+      {
+        "label": "Back",
+        "file": "gear/polrware-moss-wedge-boot-back.webp",
+        "w": 138,
+        "h": 215
+      }
+    ],
+    "description": "A moss suede lace-up with a leather heel cup, a padded collar and a striped wedge sole. Built for town and easy trails.",
+    "features": [
+      "Suede upper",
+      "Padded collar",
+      "Wedge sole",
+      "Leather heel cup"
+    ],
+    "fit": "True to size. Go half a size up if you wear thick socks.",
+    "sizeLabels": [
+      "39",
+      "40",
+      "41",
+      "42",
+      "43",
+      "44",
+      "45",
+      "46"
+    ],
+    "sizes": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1
+    ]
+  },
+  {
+    "id": "polrware-chestnut-trail-boot",
+    "name": "Polrware Chestnut Trail Boot, Chestnut leather",
+    "brand": "Polrware",
+    "material": "Chestnut leather \u00b7 Polrware",
+    "price": 165,
+    "category": "Boots",
+    "w": 348,
+    "h": 215,
+    "views": [
+      {
+        "label": "Side",
+        "file": "gear/polrware-chestnut-trail-boot-side.webp",
+        "w": 348,
+        "h": 215
+      },
+      {
+        "label": "Front",
+        "file": "gear/polrware-chestnut-trail-boot-front.webp",
+        "w": 150,
+        "h": 214
+      },
+      {
+        "label": "Back",
+        "file": "gear/polrware-chestnut-trail-boot-back.webp",
+        "w": 143,
+        "h": 213
+      }
+    ],
+    "description": "Smooth chestnut leather with a padded cuff and a deep-lug rubber sole. A classic hiker that softens with every walk.",
+    "features": [
+      "Full-grain leather",
+      "Padded cuff",
+      "Deep-lug sole",
+      "Metal eyelets"
+    ],
+    "fit": "True to size. Go half a size up if you wear thick socks.",
+    "sizeLabels": [
+      "39",
+      "40",
+      "41",
+      "42",
+      "43",
+      "44",
+      "45",
+      "46"
+    ],
+    "sizes": [
+      1,
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      0
+    ]
+  },
+  {
+    "id": "bergson-alpine-boot-blue",
+    "name": "Bergson Alpine Boot, Blue and orange",
+    "brand": "Bergson",
+    "material": "Blue and orange \u00b7 Bergson",
+    "price": 189,
+    "category": "Boots",
+    "w": 346,
+    "h": 216,
+    "views": [
+      {
+        "label": "Side",
+        "file": "gear/bergson-alpine-boot-blue-side.webp",
+        "w": 346,
+        "h": 216
+      },
+      {
+        "label": "Front",
+        "file": "gear/bergson-alpine-boot-blue-front.webp",
+        "w": 147,
+        "h": 209
+      },
+      {
+        "label": "Back",
+        "file": "gear/bergson-alpine-boot-blue-back.webp",
+        "w": 145,
+        "h": 204
+      }
+    ],
+    "description": "A blue suede mid boot with a rubber toe rand, orange accents and a stiff, grippy sole for rocky alpine trails.",
+    "features": [
+      "Rubber toe rand",
+      "Suede upper",
+      "Stiff alpine sole",
+      "Orange lace hooks"
+    ],
+    "fit": "True to size. Go half a size up if you wear thick socks.",
+    "sizeLabels": [
+      "39",
+      "40",
+      "41",
+      "42",
+      "43",
+      "44",
+      "45",
+      "46"
+    ],
+    "sizes": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  {
+    "id": "polrware-birch-hiker",
+    "name": "Polrware Birch Hiker, Stone and olive",
+    "brand": "Polrware",
+    "material": "Stone and olive \u00b7 Polrware",
+    "price": 155,
+    "category": "Boots",
+    "w": 343,
+    "h": 215,
+    "views": [
+      {
+        "label": "Side",
+        "file": "gear/polrware-birch-hiker-side.webp",
+        "w": 343,
+        "h": 215
+      },
+      {
+        "label": "Front",
+        "file": "gear/polrware-birch-hiker-front.webp",
+        "w": 153,
+        "h": 208
+      },
+      {
+        "label": "Back",
+        "file": "gear/polrware-birch-hiker-back.webp",
+        "w": 143,
+        "h": 210
+      }
+    ],
+    "description": "A stone and olive hiker with breathable mesh panels and a cushioned midsole. Light enough for long summer days.",
+    "features": [
+      "Breathable mesh panels",
+      "Cushioned midsole",
+      "Padded tongue",
+      "Grippy outsole"
+    ],
+    "fit": "True to size. Go half a size up if you wear thick socks.",
+    "sizeLabels": [
+      "39",
+      "40",
+      "41",
+      "42",
+      "43",
+      "44",
+      "45",
+      "46"
+    ],
+    "sizes": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      1
+    ]
+  },
+  {
+    "id": "wild-country-hiker-teal",
+    "name": "Wild Country Hiker, Slate teal",
+    "brand": "Wild Country",
+    "material": "Slate teal \u00b7 Wild Country",
+    "price": 175,
+    "category": "Boots",
+    "w": 345,
+    "h": 207,
+    "views": [
+      {
+        "label": "Side",
+        "file": "gear/wild-country-hiker-teal-side.webp",
+        "w": 345,
+        "h": 207
+      },
+      {
+        "label": "Front",
+        "file": "gear/wild-country-hiker-teal-front.webp",
+        "w": 142,
+        "h": 198
+      },
+      {
+        "label": "Back",
+        "file": "gear/wild-country-hiker-teal-back.webp",
+        "w": 146,
+        "h": 199
+      }
+    ],
+    "description": "A slate teal mid hiker with a cage-style overlay for support and a lugged sole that bites into mud and scree.",
+    "features": [
+      "Support cage overlay",
+      "Lugged sole",
+      "Padded collar",
+      "Quick-pull laces"
+    ],
+    "fit": "True to size. Go half a size up if you wear thick socks.",
+    "sizeLabels": [
+      "39",
+      "40",
+      "41",
+      "42",
+      "43",
+      "44",
+      "45",
+      "46"
+    ],
+    "sizes": [
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1
+    ]
+  },
+  {
+    "id": "blue-ice-hiker-black",
+    "name": "Blue Ice Hiker, Black and red",
+    "brand": "Blue Ice",
+    "material": "Black and red \u00b7 Blue Ice",
+    "price": 179,
+    "category": "Boots",
+    "w": 342,
+    "h": 204,
+    "views": [
+      {
+        "label": "Side",
+        "file": "gear/blue-ice-hiker-black-side.webp",
+        "w": 342,
+        "h": 204
+      },
+      {
+        "label": "Front",
+        "file": "gear/blue-ice-hiker-black-front.webp",
+        "w": 141,
+        "h": 198
+      },
+      {
+        "label": "Back",
+        "file": "gear/blue-ice-hiker-black-back.webp",
+        "w": 137,
+        "h": 194
+      }
+    ],
+    "description": "A black technical hiker with red details, an open overlay pattern and a heel pull tab for quick on and off.",
+    "features": [
+      "Technical overlays",
+      "Red heel pull tab",
+      "Lugged sole",
+      "Breathable lining"
+    ],
+    "fit": "True to size. Go half a size up if you wear thick socks.",
+    "sizeLabels": [
+      "39",
+      "40",
+      "41",
+      "42",
+      "43",
+      "44",
+      "45",
+      "46"
+    ],
+    "sizes": [
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      1,
+      0
+    ]
+  },
+  {
+    "id": "polrware-dune-hiker",
+    "name": "Polrware Dune Hiker, Sand and black",
+    "brand": "Polrware",
+    "material": "Sand and black \u00b7 Polrware",
+    "price": 149,
+    "category": "Boots",
+    "w": 334,
+    "h": 206,
+    "views": [
+      {
+        "label": "Side",
+        "file": "gear/polrware-dune-hiker-side.webp",
+        "w": 334,
+        "h": 206
+      },
+      {
+        "label": "Front",
+        "file": "gear/polrware-dune-hiker-front.webp",
+        "w": 153,
+        "h": 203
+      },
+      {
+        "label": "Back",
+        "file": "gear/polrware-dune-hiker-back.webp",
+        "w": 144,
+        "h": 197
+      }
+    ],
+    "description": "A sand and black mid hiker with suede overlays, a padded collar and a durable rubber sole for everyday trails.",
+    "features": [
+      "Suede overlays",
+      "Padded collar",
+      "Rubber outsole",
+      "Metal hooks"
+    ],
+    "fit": "True to size. Go half a size up if you wear thick socks.",
+    "sizeLabels": [
+      "39",
+      "40",
+      "41",
+      "42",
+      "43",
+      "44",
+      "45",
+      "46"
+    ],
+    "sizes": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+    ]
+  },
+  {
+    "id": "la-sportiva-hiker-black",
+    "name": "La Sportiva Hiker, Black and lime",
+    "brand": "La Sportiva",
+    "material": "Black and lime \u00b7 La Sportiva",
+    "price": 199,
+    "category": "Boots",
+    "w": 337,
+    "h": 206,
+    "views": [
+      {
+        "label": "Side",
+        "file": "gear/la-sportiva-hiker-black-side.webp",
+        "w": 337,
+        "h": 206
+      },
+      {
+        "label": "Front",
+        "file": "gear/la-sportiva-hiker-black-front.webp",
+        "w": 141,
+        "h": 198
+      },
+      {
+        "label": "Back",
+        "file": "gear/la-sportiva-hiker-black-back.webp",
+        "w": 137,
+        "h": 198
+      }
+    ],
+    "description": "A black and grey mid hiker with lime accents, a supportive upper and an aggressive sole for steep, loose ground.",
+    "features": [
+      "Supportive upper",
+      "Lime accents",
+      "Aggressive sole",
+      "Protective toe cap"
+    ],
+    "fit": "True to size. Go half a size up if you wear thick socks.",
+    "sizeLabels": [
+      "39",
+      "40",
+      "41",
+      "42",
+      "43",
+      "44",
+      "45",
+      "46"
+    ],
+    "sizes": [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  {
+    "id": "polrware-bark-hiker",
+    "name": "Polrware Bark Hiker, Dark brown nubuck",
+    "brand": "Polrware",
+    "material": "Dark brown nubuck \u00b7 Polrware",
+    "price": 159,
+    "category": "Boots",
+    "w": 341,
+    "h": 209,
+    "views": [
+      {
+        "label": "Side",
+        "file": "gear/polrware-bark-hiker-side.webp",
+        "w": 341,
+        "h": 209
+      },
+      {
+        "label": "Front",
+        "file": "gear/polrware-bark-hiker-front.webp",
+        "w": 145,
+        "h": 213
+      },
+      {
+        "label": "Back",
+        "file": "gear/polrware-bark-hiker-back.webp",
+        "w": 142,
+        "h": 206
+      }
+    ],
+    "description": "A dark brown nubuck hiker with a padded cuff and a sturdy lugged sole. Rich colour that hides mud well.",
+    "features": [
+      "Nubuck upper",
+      "Padded cuff",
+      "Lugged sole",
+      "Metal eyelets"
+    ],
+    "fit": "True to size. Go half a size up if you wear thick socks.",
+    "sizeLabels": [
+      "39",
+      "40",
+      "41",
+      "42",
+      "43",
+      "44",
+      "45",
+      "46"
+    ],
+    "sizes": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  {
+    "id": "polrware-tan-hiker",
+    "name": "Polrware Tan Hiker, Tan suede",
+    "brand": "Polrware",
+    "material": "Tan suede \u00b7 Polrware",
+    "price": 149,
+    "category": "Boots",
+    "w": 348,
+    "h": 211,
+    "views": [
+      {
+        "label": "Side",
+        "file": "gear/polrware-tan-hiker-side.webp",
+        "w": 348,
+        "h": 211
+      },
+      {
+        "label": "Front",
+        "file": "gear/polrware-tan-hiker-front.webp",
+        "w": 146,
+        "h": 213
+      },
+      {
+        "label": "Back",
+        "file": "gear/polrware-tan-hiker-back.webp",
+        "w": 142,
+        "h": 211
+      }
+    ],
+    "description": "A tan suede hiker with a soft padded collar and a grippy grey sole. An easy everyday boot for town and trail.",
+    "features": [
+      "Suede upper",
+      "Padded collar",
+      "Grippy sole",
+      "Speed-lace hooks"
+    ],
+    "fit": "True to size. Go half a size up if you wear thick socks.",
+    "sizeLabels": [
+      "39",
+      "40",
+      "41",
+      "42",
+      "43",
+      "44",
+      "45",
+      "46"
+    ],
+    "sizes": [
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      1,
+      1
+    ]
   }
 ]

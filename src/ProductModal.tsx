@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import type { RackItem } from './Rack';
 
 export type ProductView = { label: string; file: string; w: number; h: number };
@@ -14,6 +14,7 @@ export type JacketDetail = RackItem & {
 };
 
 const SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+const Helmet3D = lazy(() => import('./Helmet3D'));
 
 export function viewsOf(item: JacketDetail): ProductView[] {
   if (item.views?.length) return item.views;
@@ -30,11 +31,12 @@ type Props = {
   onAdd: (item: JacketDetail, size: string) => void;
   onBuyNow: (item: JacketDetail, size: string) => void;
   onSizeGuide: () => void;
+  onTryOn?: (item: JacketDetail) => void;
   formatPrice: (value: number) => string;
 };
 
 /** One product window, filled with whichever jacket is open: image (front/back), details, sizes, add to bag. */
-export default function ProductModal({ items, index, onClose, onNavigate, onAdd, onBuyNow, onSizeGuide, formatPrice }: Props) {
+export default function ProductModal({ items, index, onClose, onNavigate, onAdd, onBuyNow, onSizeGuide, onTryOn, formatPrice }: Props) {
   const ref = useRef<HTMLDialogElement>(null);
   const [view, setView] = useState(0);
   const [size, setSize] = useState('');
@@ -96,16 +98,27 @@ export default function ProductModal({ items, index, onClose, onNavigate, onAdd,
             {(() => {
               const views = viewsOf(item);
               const v = views[Math.min(view, views.length - 1)];
+              const still = (
+                <img
+                  key={`${item.id}-${v.label}`}
+                  src={`${BASE}${v.file}`}
+                  alt={`${item.name}, ${v.label.toLowerCase()} view`}
+                  width={v.w}
+                  height={v.h}
+                  className={item.category && item.category !== 'Jackets' ? 'is-gear' : undefined}
+                />
+              );
+              const in3D = item.category === 'Helmets' && views.length >= 3; // helmets are built as 3D models
               return (
                 <>
-                  <img
-                    key={`${item.id}-${v.label}`}
-                    src={`${BASE}${v.file}`}
-                    alt={`${item.name}, ${v.label.toLowerCase()} view`}
-                    width={v.w}
-                    height={v.h}
-                    className={item.category === 'Helmets' ? 'is-gear' : undefined}
-                  />
+                  {in3D ? (
+                    <Suspense fallback={still}>
+                      <Helmet3D key={item.id} views={views} view={view} label={item.name} fallback={still} />
+                    </Suspense>
+                  ) : (
+                    still
+                  )}
+                  {in3D && <p className="helmet3d-hint">Drag to turn</p>}
                   {views.length > 1 && (
                     <div className="pd-views" role="group" aria-label="Choose a view">
                       {views.map((option, k) => (
@@ -194,6 +207,11 @@ export default function ProductModal({ items, index, onClose, onNavigate, onAdd,
             <p className="pd-hint" aria-live="polite">
               {hint}
             </p>
+            {onTryOn && (
+              <button type="button" className="text-link pd-tryon" onClick={() => onTryOn(item)}>
+                Try it on the mannequin
+              </button>
+            )}
           </div>
         </div>
       )}

@@ -2,6 +2,7 @@ import {
   CSSProperties,
   FormEvent,
   KeyboardEvent as ReactKeyboardEvent,
+  PointerEvent as ReactPointerEvent,
   ReactNode,
   Suspense,
   lazy,
@@ -17,6 +18,7 @@ import rackCatalog from './rack-catalog.json';
 import ProductModal, { type JacketDetail } from './ProductModal';
 import gearCatalog from './gear-catalog.json';
 import CheckoutModal, { type CheckoutLine } from './CheckoutModal';
+import OutfitBuilder, { type LookLine } from './OutfitBuilder';
 
 const BASE = import.meta.env.BASE_URL;
 
@@ -30,6 +32,22 @@ type Product = {
   image: string;
   category: string;
   cutout?: boolean; // transparent product cutout rather than a photo
+  altImage?: string; // second angle shown on hover
+};
+
+// 3D tilt toward the pointer on product images (writes CSS variables, no re-render)
+const tilt = (event: ReactPointerEvent<HTMLElement>) => {
+  if (event.pointerType !== 'mouse') return;
+  const el = event.currentTarget;
+  const r = el.getBoundingClientRect();
+  const x = (event.clientX - r.left) / r.width - 0.5;
+  const y = (event.clientY - r.top) / r.height - 0.5;
+  el.style.setProperty('--ry', `${(x * 18).toFixed(2)}deg`);
+  el.style.setProperty('--rx', `${(-y * 14).toFixed(2)}deg`);
+};
+const untilt = (event: ReactPointerEvent<HTMLElement>) => {
+  event.currentTarget.style.setProperty('--ry', '0deg');
+  event.currentTarget.style.setProperty('--rx', '0deg');
 };
 
 type BagLine = { name: string; size?: string; qty: number };
@@ -42,6 +60,7 @@ const otherProducts: Product[] = [];
 const navLinks = [
   { id: 'shop', label: 'Shop' },
   { id: 'helmets', label: 'Helmets' },
+  { id: 'boots', label: 'Boots' },
   { id: 'campaign', label: 'Campaign' },
   { id: 'story', label: 'Our story' },
   { id: 'footer', label: 'Contact' },
@@ -178,6 +197,7 @@ const gearProducts: Product[] = gearItems.map((item) => ({
   type: item.material,
   price: item.price,
   image: `${BASE}${item.views?.[0].file ?? ''}`,
+  altImage: item.views?.[1] ? `${BASE}${item.views[1].file}` : undefined,
   category: item.category ?? 'Gear',
   cutout: true,
 }));
@@ -224,6 +244,8 @@ export default function App() {
   const rackSectionRef = useRef<HTMLElement>(null);
   const [checkoutLines, setCheckoutLines] = useState<CheckoutLine[] | null>(null);
   const [checkoutFromBag, setCheckoutFromBag] = useState(false);
+  const [lookOpen, setLookOpen] = useState(false);
+  const [lookStart, setLookStart] = useState<string | null>(null);
 
   const navRef = useRef<HTMLElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
@@ -369,6 +391,37 @@ export default function App() {
     setCheckoutLines(lines);
   };
 
+  const openLook = (startId: string | null = null) => {
+    setViewIndex(null);
+    setLookStart(startId);
+    setLookOpen(true);
+  };
+
+  const addLook = (lines: LookLine[]) => {
+    setBag((current) => {
+      let next = [...current];
+      for (const { item, size } of lines) {
+        const key = `${item.name}|${size}`;
+        const existing = next.find((line) => lineKey(line) === key);
+        next = existing
+          ? next.map((line) => (lineKey(line) === key ? { ...line, qty: Math.min(MAX_QTY, line.qty + 1) } : line))
+          : [...next, { name: item.name, size, qty: 1 }];
+      }
+      return next;
+    });
+    showToast(`Your look (${lines.length} ${lines.length === 1 ? 'piece' : 'pieces'}) was added to your bag.`);
+  };
+
+  const buyLook = (lines: LookLine[]) => {
+    const checkout = lines
+      .map(({ item, size }) => checkoutLine(item.name, size, 1))
+      .filter((l): l is CheckoutLine => l !== null);
+    if (!checkout.length) return;
+    setLookOpen(false);
+    setCheckoutFromBag(false);
+    setCheckoutLines(checkout);
+  };
+
   const buyNow = (name: string, size: string) => {
     const line = checkoutLine(name, size, 1);
     if (!line) return;
@@ -484,11 +537,12 @@ export default function App() {
                   aria-current={activeSection === link.id ? 'true' : undefined}
                   onClick={(event) => {
                     setMenuOpen(false);
-                    if (link.id === 'helmets' && activeCategory !== 'All' && activeCategory !== 'Helmets') {
-                      // the helmet grid is hidden by the current filter: show it, then jump to it
+                    const group = categories.find((c) => c.toLowerCase() === link.id);
+                    if (group && activeCategory !== 'All' && activeCategory !== group) {
+                      // that category's grid is hidden by the current filter: show it, then jump to it
                       event.preventDefault();
                       setActiveCategory('All');
-                      requestAnimationFrame(() => document.getElementById('helmets')?.scrollIntoView());
+                      requestAnimationFrame(() => document.getElementById(link.id)?.scrollIntoView());
                     }
                   }}
                 >
@@ -540,9 +594,14 @@ export default function App() {
               <br />
               long miles and everything after.
             </p>
-            <a className="cta cta-dark" href="#shop">
-              Explore the collection <Arrow />
-            </a>
+            <div className="hero-ctas">
+              <a className="cta cta-dark" href="#shop">
+                Explore the collection <Arrow />
+              </a>
+              <button type="button" className="cta cta-ghost" onClick={() => openLook()}>
+                Build a look
+              </button>
+            </div>
           </div>
 
           <div className="hero-image-wrap">
@@ -586,6 +645,9 @@ export default function App() {
         <section className="shop" id="shop">
           <header className="section-header">
             <h2 data-reveal>Cold, considered.</h2>
+            <button type="button" className="cta cta-dark" onClick={() => openLook()}>
+              Build a look <Arrow />
+            </button>
           </header>
 
           {categories.length > 2 && (
@@ -632,8 +694,10 @@ export default function App() {
                       </button>
                       <button
                         type="button"
-                        className="product-open"
+                        className={`product-open${product.altImage ? ' has-alt' : ''}`}
                         onClick={() => openProduct(product.name)}
+                        onPointerMove={product.cutout ? tilt : undefined}
+                        onPointerLeave={product.cutout ? untilt : undefined}
                         aria-label={`View ${product.name}`}
                       >
                         <img
@@ -644,6 +708,9 @@ export default function App() {
                           width={1000}
                           height={1250}
                         />
+                        {product.altImage && (
+                          <img className="is-cutout alt" src={product.altImage} alt="" loading="lazy" width={1000} height={1250} />
+                        )}
                       </button>
                       <button
                         type="button"
@@ -960,6 +1027,16 @@ export default function App() {
         formatPrice={(value) => money.format(value)}
       />
 
+      <OutfitBuilder
+        open={lookOpen}
+        items={detailItems}
+        initialId={lookStart}
+        onClose={() => setLookOpen(false)}
+        onAddLook={addLook}
+        onBuyLook={buyLook}
+        formatPrice={(value) => money.format(value)}
+      />
+
       <ProductModal
         items={detailItems}
         index={viewIndex}
@@ -968,6 +1045,7 @@ export default function App() {
         onAdd={(item, size) => addToBag(item.name, size)}
         onBuyNow={(item, size) => buyNow(item.name, size)}
         onSizeGuide={() => openInfo('size')}
+        onTryOn={(item) => openLook(item.id)}
         formatPrice={(value) => money.format(value)}
       />
     </>

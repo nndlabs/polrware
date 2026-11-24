@@ -24,7 +24,7 @@ type Props = {
 
 /* ---------- geometry constants (world units; one jacket is 1.25 wide) ---------- */
 const GW = 1.25;
-const JTOP = 0.17; // collar top sits low enough that every hanger crown clears the hook curl
+export const JTOP = 0.17; // collar top sits low enough that every hanger crown clears the hook curl
 const RAIL_TOP = 0.17; // top of the wooden brackets, used to frame the camera
 const ROD_R = 0.04;
 const REST = 1.2;
@@ -33,7 +33,7 @@ const FRONT_W = 1.4;
 const FOV = 20;
 const BASE = import.meta.env.BASE_URL;
 
-type DistField = { d: Float32Array; inside: Uint8Array; w: number; h: number };
+export type DistField = { d: Float32Array; inside: Uint8Array; w: number; h: number };
 
 class Spring {
   v: number;
@@ -70,7 +70,7 @@ function rng(seed: number) {
   };
 }
 
-function loadImg(src: string) {
+export function loadImg(src: string) {
   return new Promise<HTMLImageElement>((resolve, reject) => {
     const img = new Image();
     img.decoding = 'async';
@@ -81,7 +81,7 @@ function loadImg(src: string) {
 }
 
 /** Distance from each pixel to the garment edge: drives how far each panel puffs out. */
-function distField(mask: HTMLImageElement, w: number, h: number): DistField {
+export function distField(mask: HTMLImageElement, w: number, h: number): DistField {
   const c = document.createElement('canvas');
   c.width = w;
   c.height = h;
@@ -124,7 +124,7 @@ function sampleDist(df: DistField, u: number, v: number) {
 }
 
 /** Two displaced panels (front + back) that bulge in the middle and meet at the outline. */
-function buildGeo(width: number, height: number, df: DistField, seed: number) {
+export function buildGeo(width: number, height: number, df: DistField, seed: number) {
   const base = new THREE.PlaneGeometry(width, height, 64, Math.round((64 * height) / width));
   base.translate(0, -JTOP - height / 2, 0);
   const r = rng(seed);
@@ -161,7 +161,7 @@ function buildGeo(width: number, height: number, df: DistField, seed: number) {
   return out;
 }
 
-function studioEnvironment(renderer: THREE.WebGLRenderer) {
+export function studioEnvironment(renderer: THREE.WebGLRenderer) {
   const pm = new THREE.PMREMGenerator(renderer);
   const s = new THREE.Scene();
   s.add(new THREE.Mesh(new THREE.BoxGeometry(12, 8, 12), new THREE.MeshBasicMaterial({ color: new THREE.Color(0.42, 0.42, 0.43), side: THREE.BackSide })));
@@ -449,12 +449,12 @@ export default function Rack({ items, onAdd, formatPrice, onPick, activeId }: Pr
   const [selected, setSelected] = useState(-1);
   const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState('');
-  // phone-width screens stack the jackets on two rails so every one is visible at once
-  const [rows, setRows] = useState(() => (typeof window !== 'undefined' && window.innerWidth < 700 ? 2 : 1));
+  // one rail with every jacket on it; phone-width screens split it into two rails so the jackets stay a usable size
+  const [rows, setRows] = useState(() => (typeof window !== 'undefined' && window.innerWidth < 700 && items.length > 6 ? 2 : 1));
   useEffect(() => {
     const wrap = wrapRef.current;
     if (!wrap) return;
-    const ro = new ResizeObserver(() => setRows(wrap.clientWidth < 700 && items.length > 4 ? 2 : 1));
+    const ro = new ResizeObserver(() => setRows(wrap.clientWidth < 700 && items.length > 6 ? 2 : 1));
     ro.observe(wrap);
     return () => ro.disconnect();
   }, [items.length]);
@@ -493,20 +493,21 @@ export default function Rack({ items, onAdd, formatPrice, onPick, activeId }: Pr
     const colOf = (i: number) => i % perRow;
     const rowCount = (r: number) => Math.min(perRow, N - r * perRow);
     const ROW_GAP = maxHem + 0.42;
-    const span = Math.min((rows > 1 ? 0.62 : 0.74) * perRow, 8.4); // each jacket gets clear air on either side
+    const span = (rows > 1 ? 0.62 : 0.66) * perRow; // a little clear air between neighbours
     const slotHalf = Math.max(0.6, span / 2);
-    const bracketX = slotHalf + 0.2;
-    const railHalf = bracketX + 0.4;
+    const bracketX = slotHalf + 0.15;
+    const railHalf = bracketX + 0.22;
     const hoverWFor = (n: number) => (n > 1 ? Math.max(1.5, (FRONT_W * (n - 1)) / Math.max(0.4, 2 * slotHalf - FRONT_W)) : 1);
     const contentH = RAIL_TOP + (rows - 1) * ROW_GAP + maxHem;
     const camY = RAIL_TOP - contentH / 2;
     const hNeed = contentH / 0.9;
-    const wNeed = Math.max(3.6, (2 * railHalf + 0.1) / 0.94);
+    const wNeed = Math.max(3.6, (2 * railHalf + 0.05) / 0.98);
     const spacing = (2 * slotHalf) / perRow;
-    // one rail: the camera frames ~6 jackets and pans with scroll; stacked rails: everything in view
-    const track = rows === 1 ? wrap.closest<HTMLElement>('[data-rack-track]') : null;
+    // the whole rail is always in view: no scroll-linked panning
+    const track = null as HTMLElement | null;
     const frameW = (width: number) => (track ? Math.min(wNeed, (width < 700 ? 2.8 : 5.6) * spacing + 0.9) : wNeed);
-    wrap.style.aspectRatio = rows > 1 ? String(wNeed / hNeed) : '';
+    wrap.style.aspectRatio = String(wNeed / hNeed);
+    wrap.style.setProperty('--rack-ar', String(wNeed / hNeed));
     let camX = 0;
     let panRange = 0;
     let visibleW = 1;
