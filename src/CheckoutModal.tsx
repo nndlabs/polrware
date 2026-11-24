@@ -103,7 +103,12 @@ export default function CheckoutModal({ lines, onClose, onPaid, formatPrice }: P
     else if (new Date(2000 + Number(m[2]), Number(m[1]), 1) <= new Date()) next.exp = 'This card has expired.';
     if (!new RegExp(`^\\d{${brand === 'amex' ? 4 : 3}}$`).test(cvc)) next.cvc = `Enter the ${brand === 'amex' ? 4 : 3}-digit code.`;
     setErrors(next);
-    if (Object.keys(next).length) return;
+    const firstBad = ['email', 'card', 'name', 'exp', 'cvc'].find((k) => next[k]);
+    if (firstBad) {
+      const field = { email: 'email', card: 'cc-number', name: 'cc-name', exp: 'cc-exp', cvc: 'cc-csc' }[firstBad];
+      ref.current?.querySelector<HTMLInputElement>(`input[name="${field}"]`)?.focus();
+      return;
+    }
     const label = { visa: 'Visa', mastercard: 'Mastercard', amex: 'American Express', '': 'card' }[brand];
     finish(`${label} ending ${d.slice(-4)}`);
   };
@@ -197,7 +202,7 @@ export default function CheckoutModal({ lines, onClose, onPaid, formatPrice }: P
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     aria-invalid={Boolean(errors.email)}
-                    placeholder="name@example.com"
+                    placeholder="name@example.com…"
                   />
                   {errors.email && <small className="co-err">{errors.email}</small>}
                 </label>
@@ -217,7 +222,7 @@ export default function CheckoutModal({ lines, onClose, onPaid, formatPrice }: P
                     value={card}
                     onChange={(e) => setCard(formatCard(e.target.value))}
                     aria-invalid={Boolean(errors.card)}
-                    placeholder="1234 1234 1234 1234"
+                    placeholder="1234 1234 1234 1234…"
                   />
                   {errors.card && <small className="co-err">{errors.card}</small>}
                 </label>
@@ -242,7 +247,7 @@ export default function CheckoutModal({ lines, onClose, onPaid, formatPrice }: P
                       value={exp}
                       onChange={(e) => setExp(formatExp(e.target.value))}
                       aria-invalid={Boolean(errors.exp)}
-                      placeholder="MM / YY"
+                      placeholder="MM / YY…"
                     />
                     {errors.exp && <small className="co-err">{errors.exp}</small>}
                   </label>
@@ -255,7 +260,7 @@ export default function CheckoutModal({ lines, onClose, onPaid, formatPrice }: P
                       value={cvc}
                       onChange={(e) => setCvc(digits(e.target.value).slice(0, 4))}
                       aria-invalid={Boolean(errors.cvc)}
-                      placeholder="123"
+                      placeholder="123…"
                     />
                     {errors.cvc && <small className="co-err">{errors.cvc}</small>}
                   </label>
