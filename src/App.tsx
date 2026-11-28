@@ -878,7 +878,12 @@ export default function App() {
 
           <div className="footer-bottom">
             <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
-            <span>© {new Date().getFullYear()} Polrware</span>
+            <span>
+              © {new Date().getFullYear()} Polrware · Built by{' '}
+              <a href="https://nonamedevs.com" target="_blank" rel="author noopener">
+                Nonamedevs
+              </a>
+            </span>
             <div className="social-links">
               {socials.map((social) => (
                 <a
